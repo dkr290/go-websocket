@@ -50,6 +50,9 @@
 
         <div class="col-md-4">
               <h3>Who is online</h3>
+              <ul id="online_users">
+                
+              </ul>
         </div>
 
    <div>
@@ -81,11 +84,27 @@
 
           socket.onmessage = msg => {
 
-          console.log(msg);
-          let j = JSON.parse(msg.data);
-          console.log(j);
+          
+          let data = JSON.parse(msg.data);
+          console.log("Action is", data.action);
+          switch (data.action){
+                 case: "list_users";
+                 let ul = document.getElementById("online_users");
+          }
+
 
           }
+
+          let userInput = document.getElementById("username")
+          userInput.addEventListener("change",function(){
+            
+            let jsonData = {};
+            jsonData["action"]= "username";
+            jsonData["username"] = this.value;
+            socket.send(JSON.stringify(jsonData));
+          
+          })
+
 
 
     })
